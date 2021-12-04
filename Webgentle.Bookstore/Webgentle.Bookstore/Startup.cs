@@ -28,6 +28,7 @@ namespace Webgentle.Bookstore
 
       app.UseRouting();
 
+      //this is a end point
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapGet("/", async context =>
