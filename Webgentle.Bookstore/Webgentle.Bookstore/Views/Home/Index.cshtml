@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>This is Index Page</h1>
+
+    @{
+
+        int x = 2;
+
+    }
+
+    @switch (x)
+    {
+        case 1:<h1>This is case @x</h1>
+        break;
+    case 2:<h1>This is case @x</h1>
+    break;
+default: <h1>This default case</h1>
+    break;
+}
+
+    @if (x == 2)
+    {
+        <h1>This is case @x</h1>
+    }
+
+    @(5+2)
+    @(5+3)
+
+
+</body>
+</html>

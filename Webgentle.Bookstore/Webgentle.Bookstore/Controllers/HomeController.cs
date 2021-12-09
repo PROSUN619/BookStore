@@ -8,9 +8,11 @@ namespace Webgentle.Bookstore.Controllers
 {
   public class HomeController : Controller
   {
-    public string Index()
+    public ViewResult Index()
     {
-      return "Web Gentle";
+      return View();
     }
+
+
   }
 }
