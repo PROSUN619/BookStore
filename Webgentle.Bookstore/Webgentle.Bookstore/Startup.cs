@@ -19,6 +19,12 @@ namespace Webgentle.Bookstore
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+
+      // this pre processor code enable runtime application only for debuf stage
+#if DEBUG
+      services.AddRazorPages().AddRazorRuntimeCompilation();
+#endif
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

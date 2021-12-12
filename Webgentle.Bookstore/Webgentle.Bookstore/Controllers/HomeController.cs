@@ -18,5 +18,10 @@ namespace Webgentle.Bookstore.Controllers
       return View();
     }
 
+    public ViewResult ContactUs()
+    {
+      return View();
+    }
+
   }
 }
