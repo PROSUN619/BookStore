@@ -1,23 +1,20 @@
 ﻿@using Webgentle.Bookstore.Models;
 @model IEnumerable<BookModel>
 
-@{
-    Layout = "_Layout";
-}
-
 <div class="container">
     <h3 class="h3">Top Books</h3>
     <div class="row">
 
         @foreach (var book in Model)
         {
-            <div class="col-md-4 justify-content-sm-center">
+            <div class="col-md-4 justify-content-sm-center my-1">
                 <div class="card" style="width: 18rem;">
                     <img src="https://source.unsplash.com/120x120/?book" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">@book.Name</h5>
+                        <h5 class="card-title">@book.Title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">@book.Author</a>                        
+                        <a href="/book/getbook/@book.Id" class="btn btn-primary">View Details</a>
+                        <a class="btn btn-outline-primary" style="float:right">@book.Author</a>
                     </div>
                 </div>
             </div>

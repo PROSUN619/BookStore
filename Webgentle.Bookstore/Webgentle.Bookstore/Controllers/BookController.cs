@@ -25,14 +25,16 @@ namespace Webgentle.Bookstore.Controllers
 
     }
 
-    public BookModel GetBook(int id)
+    public ViewResult GetBook(int id)
     {
-      return _bookModel.GetBook(id);
+      var data = _bookModel.GetBook(id);
+
+      return View(data);
     }
 
-    public List<BookModel> SearchBook(string bookname, string authorname )
+    public List<BookModel> SearchBook(string title, string authorname )
     {
-      return _bookModel.SearchBook(bookname, authorname);
+      return _bookModel.SearchBook(title, authorname);
     }
 
   }
