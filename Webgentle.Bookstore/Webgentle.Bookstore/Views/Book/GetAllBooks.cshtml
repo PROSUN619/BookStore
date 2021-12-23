@@ -3,6 +3,20 @@
     ViewData["Title"] = "All Books";
 }
 
+@*@{ 
+  var paramDictionary = new Dictionary<string, string>() {
+
+      {"id","1" },
+      {"name","c#" },
+      {"author","Robin" }
+
+  };
+}
+    USED TO send multiple data using query string
+    *@
+
+
+
 <div class="container">
     <h3 class="h3">Top Books</h3>
     <div class="row">
@@ -15,11 +29,14 @@
                     <div class="card-body">
                         <h5 class="card-title">@book.Title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="/book/getbook/@book.Id" class="btn btn-primary">View Details</a>
+                        <a asp-controller="Book" asp-action="GetBook" asp-route-id="@book.Id"
+        class="btn btn-primary">View Details</a>
+                        @*<a asp-controller="Book" asp-action="GetBook" asp-all-route-data="@paramDictionary"
+                           class="btn btn-primary">View Details</a>*@
                         <a class="btn btn-outline-primary" style="float:right">@book.Author</a>
                     </div>
                 </div>
-            </div>
+            </div> 
         }
     </div>
 </div>

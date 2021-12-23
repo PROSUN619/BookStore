@@ -11,7 +11,7 @@ namespace Webgentle.Bookstore.Controllers
   public class HomeController : Controller
   {
     [ViewData]
-    public string MyProperty { get; set; } // we can also use view data property to display file on view page, layout page
+    public string MyProperty { get; set; } // we can also use view data attribute to display file on view page, layout page
 
     public ViewResult Index()
     {
@@ -26,7 +26,7 @@ namespace Webgentle.Bookstore.Controllers
       ViewData["bookObject"] = new BookModel() {Title = "html",Author="Harry" };
 
 
-      MyProperty = "this is viewdata property";
+      MyProperty = "this is viewdata attribute";
       return View();
     }
 

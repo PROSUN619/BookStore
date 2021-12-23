@@ -1,0 +1,5 @@
+﻿//go to tools->nuget package manager -> package manager console
+get-help entityframework //view all comand
+//intsall Microsoft.EntityFrameworkCore.Tools
+Add-Migration init // start migration add classes, init is the name
+update-database

@@ -1,0 +1,35 @@
+﻿
+
+@{
+    ViewData["Title"] = "New Form";
+}
+
+@model BookModel
+
+<form method="post" asp-controller="Book" asp-action="AddNewBook" >
+    @*// if post action method name same as page action method then no need to define
+      same for the controller too    *@
+    <div class="container">
+        <h3 class="display-6">Add New Book</h3>
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Author"></label>
+            <input asp-for="Author" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Category"></label>
+            <textarea asp-for="Category" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="TotalPages"></label>
+            <textarea asp-for="TotalPages" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Add Book" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
