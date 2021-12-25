@@ -11,44 +11,49 @@ namespace Webgentle.Bookstore.Controllers
   public class BookController : Controller
   {
 
-    private readonly BookRepository _bookModel;
+    private readonly BookRepository _bookModel = null;
 
-    public BookController()
+    public BookController(BookRepository repository) // this constructor will get asigned when startup.cs load
+      // due to dependancy injection
     {
-      _bookModel = new BookRepository();
+      _bookModel = repository;
     }
 
-    public ViewResult GetAllBooks()
+    public async Task<ViewResult> GetAllBooks()
     {
-      var data =  _bookModel.GetAllBooks();
+      var data =  await _bookModel.GetAllBooks();
       return View(data);
 
     }
 
-    public ViewResult GetBook(int id)
+    public async Task<ViewResult> GetBook(int id)
     {
-      var data = _bookModel.GetBook(id);
+      var data = await _bookModel.GetBook(id);
 
       return View(data);
     }
 
-    public ViewResult NewBook()
+    public ViewResult NewBook(bool isSucess = false, int id = 0)
     {
+      ViewBag.IsSuccess = isSucess;
+      ViewBag.Id = id;
       return View();
     }
 
     [HttpPost]
-    public ViewResult AddNewBook(BookModel model) 
+    public async Task<IActionResult> AddNewBook(BookModel model) 
     {
-      return View("NewBook");
+      int id = await _bookModel.AddNewBooks(model);
+      if (id > 0)
+      {
+        return RedirectToAction(nameof(NewBook), new { isSucess = true, id = id });
+      }
+      return View();
     }
 
     public List<BookModel> SearchBook(string title, string authorname )
     {
       return _bookModel.SearchBook(title, authorname);
     }
-
-
-
   }
 }

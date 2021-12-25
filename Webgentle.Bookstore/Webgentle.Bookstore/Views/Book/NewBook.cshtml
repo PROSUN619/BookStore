@@ -1,7 +1,9 @@
 ﻿
 
 @{
-    ViewData["Title"] = "New Form";
+  ViewData["Title"] = "New Form";
+  var isSuccess = Convert.ToBoolean(ViewBag.IsSuccess);
+  int id = ViewBag.Id;
 }
 
 @model BookModel
@@ -11,6 +13,19 @@
       same for the controller too    *@
     <div class="container">
         <h3 class="display-6">Add New Book</h3>
+        
+        @{ 
+          if (isSuccess)
+          {
+                <div class="alert alert-primary" role="alert">
+                    Data Saved Successfully!
+                    <br />
+                    Click <a asp-controller="Book" asp-action="GetBook" asp-route-Id="@id">Here</a> to view
+                </div>
+              }
+        } 
+        
+
         <div class="form-group">
             <label asp-for="Title"></label>
             <input asp-for="Title" class="form-control" />
@@ -20,14 +35,14 @@
             <input asp-for="Author" class="form-control" />
         </div>
         <div class="form-group">
-            <label asp-for="Category"></label>
-            <textarea asp-for="Category" class="form-control"></textarea>
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <label asp-for="TotalPages"></label>
             <textarea asp-for="TotalPages" class="form-control"></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group m-2">
             <input type="submit" value="Add Book" class="btn btn-primary" />
         </div>
     </div>

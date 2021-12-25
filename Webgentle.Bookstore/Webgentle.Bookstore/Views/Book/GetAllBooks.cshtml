@@ -28,9 +28,9 @@
                     <img src="https://source.unsplash.com/120x120/?book" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">@book.Title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">@book.Description</p>
                         <a asp-controller="Book" asp-action="GetBook" asp-route-id="@book.Id"
-        class="btn btn-primary">View Details</a>
+                        class="btn btn-primary">View Details</a>
                         @*<a asp-controller="Book" asp-action="GetBook" asp-all-route-data="@paramDictionary"
                            class="btn btn-primary">View Details</a>*@
                         <a class="btn btn-outline-primary" style="float:right">@book.Author</a>

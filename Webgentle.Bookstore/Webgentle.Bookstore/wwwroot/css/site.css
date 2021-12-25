@@ -1,4 +1,10 @@
-﻿body {
+﻿* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    
 }
 
 .img{
@@ -19,6 +25,10 @@
     background-color: aquamarine !important;
 }
 
-main {
-    padding-top: 65px;
-}
+/*main {
+    padding: 200px,0px
+}*/
+
+/*header {
+    margin-top:85px;
+}*/

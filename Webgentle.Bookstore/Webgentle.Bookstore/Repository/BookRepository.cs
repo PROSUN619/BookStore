@@ -1,24 +1,75 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webgentle.Bookstore.Data;
 using Webgentle.Bookstore.Models;
 
 namespace Webgentle.Bookstore.Repository
 {
   public class BookRepository
   {
-
-
-    public List<BookModel> GetAllBooks()
+    private readonly BookStoreContext _context;
+    public BookRepository(BookStoreContext context)
     {
-      return BookStore();
+      _context = context;
+    }
+
+    public async Task<int> AddNewBooks(BookModel model)
+    {
+      var newModel = new Book {
+        Author = model.Author,
+        CreatedOn = DateTime.Now,
+        Description = model.Description,
+        Title = model.Title,
+        TotalPages = model.TotalPages,
+        ModifiedOn = DateTime.Now
+      };
+
+      await _context.AddAsync(newModel);
+      await  _context.SaveChangesAsync();
+      return newModel.Id;
+    }
+
+    public async Task<List<BookModel>> GetAllBooks()
+    {
+      List<BookModel> modelList = new List<BookModel>();
+      var bookList = await  _context.Books.ToListAsync();
+      //return BookStore();
+      if (bookList?.Any() == true){
+        foreach (var item in bookList)
+        {
+          modelList.Add(
+             new BookModel { Id = item.Id, Title = item.Title, Author = item.Author, Category = item.Category,
+               Language = item.Language, TotalPages = item.TotalPages, Description = item.Description }
+            );
+        }
+      }
+
+      return modelList;
     }
 
 
-    public BookModel GetBook(int id)
+    public async Task<BookModel> GetBook(int id)
     {
-      return BookStore().Find(x => x.Id.Equals(id));
+      var book = await _context.Books.FindAsync(id);
+      if (book != null)
+      {
+        return new BookModel()
+        {
+          Id = book.Id,
+          Title = book.Title,
+          Author = book.Author,
+          Category = book.Category,
+          Language = book.Language,
+          TotalPages = book.TotalPages,
+          Description = book.Description
+        };
+      }
+      else return null;
+
+     // return BookStore().Find(x => x.Id.Equals(id));
     }
 
     public List<BookModel> SearchBook(string title, string author)

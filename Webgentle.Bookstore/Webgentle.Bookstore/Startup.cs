@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Webgentle.Bookstore.Data;
+using Webgentle.Bookstore.Repository;
 
 namespace Webgentle.Bookstore
 {
@@ -32,6 +33,8 @@ namespace Webgentle.Bookstore
       services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
 
+      services.AddScoped<BookRepository, BookRepository>();
+      //add this dependancy injection to create new instance of book repository when controller called
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
