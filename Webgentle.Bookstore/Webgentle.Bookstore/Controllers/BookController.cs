@@ -35,16 +35,18 @@ namespace Webgentle.Bookstore.Controllers
 
     public ViewResult NewBook(bool isSucess = false, int id = 0)
     {
+      var data = new BookModel() { Language = "English" };
       ViewBag.IsSuccess = isSucess;
       ViewBag.Id = id;
-      return View();
+      SetListofLanguage();
+      return View(data);
     }
 
     [HttpPost]
     public async Task<IActionResult> AddNewBook(BookModel model) 
     {
 
-      ModelState.AddModelError("","This is custom error");
+      //ModelState.AddModelError("","This is custom error");
       if (ModelState.IsValid)
       {
         int id = await _bookModel.AddNewBooks(model);
@@ -55,7 +57,13 @@ namespace Webgentle.Bookstore.Controllers
       }
       ViewBag.IsSuccess = false;
       ViewBag.Id = 0;
+      SetListofLanguage();
       return View("NewBook");
+    }
+
+    private void SetListofLanguage()
+    {
+      ViewBag.Languages = new List<string>() { "English", "Hindi","Bengali"};
     }
 
     public List<BookModel> SearchBook(string title, string authorname )

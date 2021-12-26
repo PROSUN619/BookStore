@@ -3,3 +3,4 @@ get-help entityframework //view all comand
 //intsall Microsoft.EntityFrameworkCore.Tools
 Add-Migration init // start migration add classes, init is the name
 update-database
+use novalidate in form tag to prevent html validation

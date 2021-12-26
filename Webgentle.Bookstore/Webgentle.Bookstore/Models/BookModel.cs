@@ -17,6 +17,7 @@ namespace Webgentle.Bookstore.Models
     [Required(ErrorMessage = "Total pages is missing")]
     [Display(Name = "Total Pages")]
     public int? TotalPages { get; set; }
+    [Required][Display(Name = "Select Language")]
     public string Language { get; set; }
     public string Description { get; set; }
   }

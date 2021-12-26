@@ -22,6 +22,7 @@ namespace Webgentle.Bookstore.Repository
         Author = model.Author,
         CreatedOn = DateTime.Now,
         Description = model.Description,
+        Language = model.Language,
         Title = model.Title,
         TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0 ,
         ModifiedOn = DateTime.Now

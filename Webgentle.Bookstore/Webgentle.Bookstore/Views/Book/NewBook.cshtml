@@ -1,30 +1,30 @@
 ﻿
 
 @{
-  ViewData["Title"] = "New Form";
-  var isSuccess = Convert.ToBoolean(ViewBag.IsSuccess);
-  int id = ViewBag.Id;
+    ViewData["Title"] = "New Form";
+    var isSuccess = Convert.ToBoolean(ViewBag.IsSuccess);
+    int id = ViewBag.Id;
 }
 
 @model BookModel
 
-<form method="post" asp-controller="Book" asp-action="AddNewBook" >
+<form method="post" asp-controller="Book" asp-action="AddNewBook">
     @*// if post action method name same as page action method then no need to define
-      same for the controller too    *@
+        same for the controller too    *@
     <div class="container">
         <h3 class="display-6">Add New Book</h3>
-        
-        @{ 
-          if (isSuccess)
-          {
+
+        @{
+            if (isSuccess)
+            {
                 <div class="alert alert-primary" role="alert">
                     Data Saved Successfully!
                     <br />
                     Click <a asp-controller="Book" asp-action="GetBook" asp-route-Id="@id">Here</a> to view
                 </div>
-              }
-        } 
-        
+            }
+        }
+
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Title"></label>
@@ -39,6 +39,17 @@
         <div class="form-group">
             <label asp-for="Description"></label>
             <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Language"></label>
+            <select asp-for="Language" class="form-select" asp-items="new SelectList( ViewBag.Languages)">
+                <option value="">Select</option>
+                <!--<option value="">Select</option>--> @*use value="" for default || required -- use this for html validation*@
+                <!--<option>English</option>
+                <option>Hindi</option>
+                <option>Bengali</option>-->
+            </select>
+            <span asp-validation-for="Language" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="TotalPages"></label>
