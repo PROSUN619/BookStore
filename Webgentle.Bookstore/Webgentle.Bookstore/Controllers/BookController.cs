@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,7 +64,17 @@ namespace Webgentle.Bookstore.Controllers
 
     private void SetListofLanguage()
     {
-      ViewBag.Languages = new List<string>() { "English", "Hindi","Bengali"};
+      ViewBag.Languages = new SelectList(GetListLanguage(), "Id", "Name");
+    }
+
+    private List<LanguageModel> GetListLanguage()
+    {
+      return new List<LanguageModel>() 
+      { 
+          new LanguageModel(){Id = 1, Name="English"},
+          new LanguageModel(){Id = 2, Name="Hindi"},
+          new LanguageModel(){Id = 3, Name="Bengali"}
+      };
     }
 
     public List<BookModel> SearchBook(string title, string authorname )
