@@ -43,12 +43,19 @@ namespace Webgentle.Bookstore.Controllers
     [HttpPost]
     public async Task<IActionResult> AddNewBook(BookModel model) 
     {
-      int id = await _bookModel.AddNewBooks(model);
-      if (id > 0)
+
+      ModelState.AddModelError("","This is custom error");
+      if (ModelState.IsValid)
       {
-        return RedirectToAction(nameof(NewBook), new { isSucess = true, id = id });
+        int id = await _bookModel.AddNewBooks(model);
+        if (id > 0)
+        {
+          return RedirectToAction(nameof(NewBook), new { isSucess = true, id = id });
+        }
       }
-      return View();
+      ViewBag.IsSuccess = false;
+      ViewBag.Id = 0;
+      return View("NewBook");
     }
 
     public List<BookModel> SearchBook(string title, string authorname )
