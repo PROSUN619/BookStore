@@ -34,6 +34,7 @@ namespace Webgentle.Bookstore
 #endif
 
       services.AddScoped<BookRepository, BookRepository>();
+      services.AddScoped<LanguageRepository, LanguageRepository>();
       //add this dependancy injection to create new instance of book repository when controller called
     }
 

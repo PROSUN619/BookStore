@@ -12,35 +12,38 @@ namespace Webgentle.Bookstore.Controllers
   public class BookController : Controller
   {
 
-    private readonly BookRepository _bookModel = null;
+    private readonly BookRepository _bookRepository = null;
+    private readonly LanguageRepository _LanguageRepository = null;
 
-    public BookController(BookRepository repository) // this constructor will get asigned when startup.cs load
+    public BookController(BookRepository bookRepository, LanguageRepository languageRepository)
+      // this constructor will get asigned when startup.cs load
       // due to dependancy injection
     {
-      _bookModel = repository;
+      _bookRepository = bookRepository;
+      _LanguageRepository = languageRepository;
     }
 
     public async Task<ViewResult> GetAllBooks()
     {
-      var data =  await _bookModel.GetAllBooks();
+      var data =  await _bookRepository.GetAllBooks();
       return View(data);
 
     }
 
     public async Task<ViewResult> GetBook(int id)
     {
-      var data = await _bookModel.GetBook(id);
+      var data = await _bookRepository.GetBook(id);
 
       return View(data);
     }
 
-    public ViewResult NewBook(bool isSucess = false, int id = 0)
+    public async Task<ViewResult> NewBook(bool isSucess = false, int id = 0)
     {
-      var data = new BookModel() { Language = "English" };
+      //var data = new BookModel() { Language = "English" };
       ViewBag.IsSuccess = isSucess;
       ViewBag.Id = id;
-      SetListofLanguage();
-      return View(data);
+      ViewBag.Languages = await SetListofLanguage();
+      return View();
     }
 
     [HttpPost]
@@ -50,7 +53,7 @@ namespace Webgentle.Bookstore.Controllers
       //ModelState.AddModelError("","This is custom error");
       if (ModelState.IsValid)
       {
-        int id = await _bookModel.AddNewBooks(model);
+        int id = await _bookRepository.AddNewBooks(model);
         if (id > 0)
         {
           return RedirectToAction(nameof(NewBook), new { isSucess = true, id = id });
@@ -58,14 +61,15 @@ namespace Webgentle.Bookstore.Controllers
       }
       ViewBag.IsSuccess = false;
       ViewBag.Id = 0;
-      SetListofLanguage();
+      ViewBag.Languages =  await SetListofLanguage();
       return View("NewBook");
     }
 
-    private void SetListofLanguage()
+    private async Task<SelectList> SetListofLanguage()
     {
       //ViewBag.Languages = new SelectList(GetListLanguage(), "Id", "Name");
-      ViewBag.Languages = GetMultiLanguage();
+      //ViewBag.Languages = GetMultiLanguage();
+      return new SelectList (await _LanguageRepository.GetLanguages(),"Id","Name");
     }
 
     private List<LanguageModel> GetListLanguage()
@@ -90,9 +94,9 @@ namespace Webgentle.Bookstore.Controllers
       };
     }
 
-    public List<BookModel> SearchBook(string title, string authorname )
-    {
-      return _bookModel.SearchBook(title, authorname);
-    }
+    //public List<BookModel> SearchBook(string title, string authorname )
+    //{
+    //  //return _bookModel.SearchBook(title, authorname);
+    //}
   }
 }
