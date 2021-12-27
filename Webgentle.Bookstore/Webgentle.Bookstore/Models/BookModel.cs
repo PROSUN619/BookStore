@@ -19,6 +19,8 @@ namespace Webgentle.Bookstore.Models
     public int? TotalPages { get; set; }
     [Required][Display(Name = "Select Language")]
     public string Language { get; set; }
+
+    public List<string> MultiLanguage { get; set; }
     public string Description { get; set; }
   }
 }

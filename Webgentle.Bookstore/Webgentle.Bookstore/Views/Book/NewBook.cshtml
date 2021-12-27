@@ -41,15 +41,15 @@
             <textarea asp-for="Description" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label asp-for="Language"></label>
-            <select asp-for="Language" class="form-select" asp-items="ViewBag.Languages">
+            <label asp-for="MultiLanguage"></label>
+            <select asp-for="MultiLanguage" class="form-select" asp-items="ViewBag.Languages" multiple>
                 <option value="">Select</option>
                 <!--<option value="">Select</option>--> @*use value="" for default || required -- use this for html validation*@
                 <!--<option>English</option>
                 <option>Hindi</option>
                 <option>Bengali</option>-->
             </select>
-            <span asp-validation-for="Language" class="text-danger"></span>
+            <span asp-validation-for="MultiLanguage" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="TotalPages"></label>

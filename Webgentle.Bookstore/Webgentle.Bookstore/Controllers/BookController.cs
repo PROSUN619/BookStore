@@ -64,7 +64,8 @@ namespace Webgentle.Bookstore.Controllers
 
     private void SetListofLanguage()
     {
-      ViewBag.Languages = new SelectList(GetListLanguage(), "Id", "Name");
+      //ViewBag.Languages = new SelectList(GetListLanguage(), "Id", "Name");
+      ViewBag.Languages = GetMultiLanguage();
     }
 
     private List<LanguageModel> GetListLanguage()
@@ -74,6 +75,18 @@ namespace Webgentle.Bookstore.Controllers
           new LanguageModel(){Id = 1, Name="English"},
           new LanguageModel(){Id = 2, Name="Hindi"},
           new LanguageModel(){Id = 3, Name="Bengali"}
+      };
+    }
+
+    private List<SelectListItem> GetMultiLanguage()
+    {
+      return new List<SelectListItem>()
+      {
+          new SelectListItem(){ Text = "English", Value = "1"},
+          new SelectListItem(){ Text = "Hindi", Value = "2"},
+          new SelectListItem(){ Text = "Bengali", Value = "3"},
+          new SelectListItem(){ Text = "Urdu", Value = "4"},
+          new SelectListItem(){ Text = "Tamil", Value = "5"}
       };
     }
 
