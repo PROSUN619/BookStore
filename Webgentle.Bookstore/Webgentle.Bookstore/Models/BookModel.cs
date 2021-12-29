@@ -11,8 +11,8 @@ namespace Webgentle.Bookstore.Models
   public class BookModel
   {
     public int Id { get; set; }
-    //[Required]//[StringLength(maximumLength:20,MinimumLength =5)]
-    [CustomAttribute("angular",ErrorMessage ="Error Message from model")]
+    [Required]//[StringLength(maximumLength:20,MinimumLength =5)]
+    //[CustomAttribute("angular",ErrorMessage ="Error Message from model")]
     public string Title { get; set; }
     [Required]
     public string Author { get; set; }
