@@ -28,9 +28,15 @@ namespace Webgentle.Bookstore
 
       services.AddControllersWithViews();
 
-      // this pre processor code enable runtime application only for debug stage
+      // this pre processor code enable runtime application only for debug/development stage
 #if DEBUG
       services.AddRazorPages().AddRazorRuntimeCompilation();
+        
+        //use this to prevent client side validation
+      //  .AddViewOptions(option => {
+      //  option.HtmlHelperOptions.ClientValidationEnabled = false;
+      //});
+
 #endif
 
       services.AddScoped<BookRepository, BookRepository>();

@@ -23,8 +23,8 @@
                     @*use asp-append-version to avoid browser cache problem while load from own server*@
                     Book Store
                 </a>
-                
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -57,13 +57,16 @@
     </header>
     <main role="main" class="py-5">
         @RenderBody()
-    </main>    
+    </main>
     <footer class="d-flex flex-wrap justify-content-center align-items-center py-1 fixed-bottom">
         <p class="mb-0 text-muted">Copyright &copy; @DateTime.Now.Year  Book Store</p>
         <custom-email email="prosun.chakraborty@gmail.com"></custom-email>
-        
+
     </footer>
     <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
 
     @*Use RenderSection to render script file into view page after script tag of layout page*@

@@ -8,7 +8,15 @@
 
 @model BookModel
 
-<form method="post" asp-controller="Book" asp-action="AddNewBook">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status"id="loading" style="display:none">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+
+<form data-ajax="true" data-ajax-complete="onComplete()" data-ajax-success="onSuccess()"  data-ajax-failure="onFailure()"
+      data-ajax-loading="#loading"
+      method="post" asp-controller="Book" asp-action="AddNewBook">
     @*// if post action method name same as page action method then no need to define
         same for the controller too    *@
     <div class="container">
@@ -53,7 +61,7 @@
         </div>
         <div class="form-group">
             <label asp-for="TotalPages"></label>
-            <textarea asp-for="TotalPages" class="form-control"></textarea>
+            <input asp-for="TotalPages" class="form-control"/>
             <span asp-validation-for="TotalPages" class="text-danger"></span>
         </div>
         <div class="form-group m-2">
@@ -62,3 +70,21 @@
     </div>
 </form>
 
+@section scripts{
+
+    <script type="text/javascript">
+        function onComplete() {
+            alert('Complete');
+        }
+
+        function onSuccess() {
+            alert('Successfull');
+        }
+
+        function onFailure() {
+            alert('Failure');
+        }
+    </script>
+
+
+ }
