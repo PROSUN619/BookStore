@@ -25,8 +25,21 @@ namespace Webgentle.Bookstore.Repository
         LanguageId = model.LanguageId,
         Title = model.Title,
         TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0 ,
-        ModifiedOn = DateTime.Now
+        ModifiedOn = DateTime.Now,
+        CoverImageURL = model.CoverImageURL,
+        BookPdfURL = model.BookPdfURL
       };
+
+      newModel.BookGallaries = new List<BookGallary>();
+
+      foreach (var item in model.Gallary)
+      {
+        newModel.BookGallaries.Add( new BookGallary()
+        {
+          Name = item.Name,
+          URL = item.URL
+        });
+      }
 
       await _context.AddAsync(newModel);
       await  _context.SaveChangesAsync();
@@ -35,20 +48,37 @@ namespace Webgentle.Bookstore.Repository
 
     public async Task<List<BookModel>> GetAllBooks()
     {
-      List<BookModel> modelList = new List<BookModel>();
-      var bookList = await  _context.Books.ToListAsync();
+      //List<BookModel> modelList = new List<BookModel>();
+      //var bookList = await  _context.Books.ToListAsync();
       //return BookStore();
-      if (bookList?.Any() == true){
-        foreach (var item in bookList)
-        {
-          modelList.Add(
-             new BookModel { Id = item.Id, Title = item.Title, Author = item.Author, Category = item.Category,
-               LanguageId = item.LanguageId, Language = item.Language.Name, TotalPages = item.TotalPages, Description = item.Description }
-            );
-        }
-      }
 
-      return modelList;
+      return await _context.Books.Select(item => new BookModel()
+      {
+        Id = item.Id,
+        Title = item.Title,
+        Author = item.Author,
+        Category = item.Category,
+        LanguageId = item.LanguageId,
+        Language = item.Language.Name,
+        TotalPages = item.TotalPages,
+        CoverImageURL = item.CoverImageURL,
+        Description = item.Description,
+        BookPdfURL = item.BookPdfURL
+      }).ToListAsync();
+      
+            
+      //if (bookList?.Any() == true){
+      //  foreach (var item in bookList)
+      //  {
+      //    modelList.Add(
+      //       new BookModel { Id = item.Id, Title = item.Title, Author = item.Author, Category = item.Category,
+      //         LanguageId = item.LanguageId, Language = item.Language.Name, TotalPages = item.TotalPages, 
+      //          CoverImageURL = item.CoverImageURL,  Description = item.Description }
+      //      );
+      //  }
+      //}
+
+      //return modelList;
     }
 
 
@@ -66,7 +96,15 @@ namespace Webgentle.Bookstore.Repository
           LanguageId = s.LanguageId,
           Language = s.Language.Name,
           TotalPages = s.TotalPages,
-          Description = s.Description
+          Description = s.Description,
+          CoverImageURL = s.CoverImageURL,
+          Gallary = s.BookGallaries.Select(s1 => new GallaryModel() 
+          {
+              Id = s1.Id,
+              Name = s1.Name,
+              URL = s1.URL
+          }).ToList(),
+          BookPdfURL = s.BookPdfURL
         }).FirstOrDefaultAsync();
 
 

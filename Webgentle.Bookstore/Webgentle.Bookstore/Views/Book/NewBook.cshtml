@@ -1,4 +1,4 @@
-﻿@using Webgentle.Bookstore.Enums 
+﻿@using Webgentle.Bookstore.Enums
 
 @{
     ViewData["Title"] = "New Form";
@@ -8,15 +8,16 @@
 
 @model BookModel
 
-    <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status"id="loading" style="display:none">
-            <span class="sr-only"></span>
-        </div>
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status" id="loading" style="display:none">
+        <span class="sr-only"></span>
     </div>
+</div>
 
-<form data-ajax="true" data-ajax-complete="onComplete()" data-ajax-success="onSuccess()"  data-ajax-failure="onFailure()"
-      data-ajax-loading="#loading"
-      method="post" asp-controller="Book" asp-action="AddNewBook">
+@*<form enctype="multipart/form-data" data-ajax="true" data-ajax-complete="onComplete()"
+    data-ajax-success="onSuccess()" data-ajax-failure="onFailure()" data-ajax-loading="#loading"
+    method="post" asp-controller="Book" asp-action="AddNewBook">*@
+<form enctype="multipart/form-data" asp-controller="Book" asp-action="AddNewBook">
     @*// if post action method name same as page action method then no need to define
         same for the controller too    *@
     <div class="container">
@@ -54,15 +55,36 @@
                 <option value="">Select</option>
                 <!--<option value="">Select</option>--> @*use value="" for default || required -- use this for html validation*@
                 <!--<option>English</option>
-                <option>Hindi</option>
-                <option>Bengali</option>-->
+            <option>Hindi</option>
+            <option>Bengali</option>-->
             </select>
             <span asp-validation-for="LanguageId" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="TotalPages"></label>
-            <input asp-for="TotalPages" class="form-control"/>
+            <input asp-for="TotalPages" class="form-control" />
             <span asp-validation-for="TotalPages" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="mb-3">
+                <label asp-for="CoverPhoto" class="form-label"></label>
+                <input asp-for="CoverPhoto" class="form-control" type="file" id="formFile">
+            </div>
+            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="mb-3">
+                <label asp-for="GallaryFiles" class="form-label"></label>
+                <input asp-for="GallaryFiles" class="form-control" type="file" id="formFile" multiple>
+            </div>
+            <span asp-validation-for="GallaryFiles" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="mb-3">
+                <label asp-for="BookPdf" class="form-label"></label>
+                <input asp-for="BookPdf" class="form-control" type="file" id="formFile">
+            </div>
+            <span asp-validation-for="BookPdf" class="text-danger"></span>
         </div>
         <div class="form-group m-2">
             <input type="submit" value="Add Book" class="btn btn-primary" />
@@ -74,17 +96,17 @@
 
     <script type="text/javascript">
         function onComplete() {
-            alert('Complete');
+            // alert('Complete');
         }
 
         function onSuccess() {
-            alert('Successfull');
+            //  alert('Successfull');
         }
 
         function onFailure() {
-            alert('Failure');
+            //  alert('Failure');
         }
     </script>
 
 
- }
+}

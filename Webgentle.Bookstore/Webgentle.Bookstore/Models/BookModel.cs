@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Webgentle.Bookstore.Enums;
 using Webgentle.Bookstore.Helper;
+using Microsoft.AspNetCore.Http;
 
 namespace Webgentle.Bookstore.Models
 {
@@ -25,5 +26,17 @@ namespace Webgentle.Bookstore.Models
     public string Language { get; set; }
     public Language EnumLanguage { get; set; }
     public string Description { get; set; }
+    [Required][Display(Name ="Upload cover photo")]
+    public IFormFile CoverPhoto { get; set; }
+    public string CoverImageURL { get; set; }
+    [Required]
+    [Display(Name = "Upload Gallary photo")]
+    public IFormFileCollection GallaryFiles { get; set; }
+    public List<GallaryModel> Gallary { get; set; }
+    [Required]
+    [Display(Name = "Upload Book PDF")]
+    public IFormFile BookPdf { get; set; }
+    public string BookPdfURL { get; set; }
+
   }
 }

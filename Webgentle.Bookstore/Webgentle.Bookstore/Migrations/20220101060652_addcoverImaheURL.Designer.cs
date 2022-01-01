@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webgentle.Bookstore.Data;
 
 namespace Webgentle.Bookstore.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    partial class BookStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220101060652_addcoverImaheURL")]
+    partial class addcoverImaheURL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,9 +29,6 @@ namespace Webgentle.Bookstore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BookPdfURL")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Category")
@@ -63,29 +62,6 @@ namespace Webgentle.Bookstore.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Webgentle.Bookstore.Data.BookGallary", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("URL")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("BookGallary");
-                });
-
             modelBuilder.Entity("Webgentle.Bookstore.Data.Language", b =>
                 {
                     b.Property<int>("Id")
@@ -109,15 +85,6 @@ namespace Webgentle.Bookstore.Migrations
                     b.HasOne("Webgentle.Bookstore.Data.Language", "Language")
                         .WithMany("Books")
                         .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Webgentle.Bookstore.Data.BookGallary", b =>
-                {
-                    b.HasOne("Webgentle.Bookstore.Data.Book", "Book")
-                        .WithMany("BookGallaries")
-                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
