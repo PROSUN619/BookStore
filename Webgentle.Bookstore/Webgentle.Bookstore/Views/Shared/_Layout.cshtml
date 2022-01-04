@@ -15,54 +15,11 @@
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">
-                    <img src="/images/bootstrap-logo.svg" alt="" width="30" height="24" asp-append-version="true">
-                    @*use asp-append-version to avoid browser cache problem while load from own server*@
-                    Book Store
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Home" asp-action="AboutUs">About US</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Book" asp-action="GetAllBooks">All Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Book" asp-action="NewBook">New Book</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <button class="custom-btn btn btn-primary" type="submit">Login</button>
-                        <button class="custom-btn btn btn-primary" type="submit">Register</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <partial name="_HeaderPartial" />
     <main role="main" class="py-5">
         @RenderBody()
     </main>
-    <footer class="d-flex flex-wrap justify-content-center align-items-center py-1 fixed-bottom">
-        <p class="mb-0 text-muted">Copyright &copy; @DateTime.Now.Year  Book Store</p>
-        <custom-email email="prosun.chakraborty@gmail.com"></custom-email>
-
-    </footer>
+    <partial name="_FooterPartial" />
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/jquery-validate/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>

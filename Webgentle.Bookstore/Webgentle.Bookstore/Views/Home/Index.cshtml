@@ -8,8 +8,15 @@
 }
 
 @{
-    dynamic data = ViewBag.Data;
-
+  dynamic data = ViewBag.Data;
+  var defaultBook = new BookModel()
+  {
+      Id= 0,
+      CoverImageURL="/books/cover/default.jpg",
+      Title = "Book Title",
+      Description = "Book Description",
+      Author = "No Author"
+  };
 }
 
 @{
@@ -35,39 +42,22 @@
 
 <div class="py-5 bg-light">
     <div class="container">
-        <h3 class="h3">Top Books</h3>
-        <div class="row">
+        @*<h3 class="h3">Top Books</h3>*@
+        <!--Calling view component-->
+        @(await Component.InvokeAsync("TopBook",new { count = 3 }))
+        @*<vc:top-book count="1"></vc:top-book>*@
+        <!--End Calling view component-->
+        @*<div class="row">
             <div class="col-md-4 justify-content-sm-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://source.unsplash.com/120x120/?book" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://source.unsplash.com/120x120/?book" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
+                <partial name="_BookThumbnail" model="defaultBook" />
             </div>
             <div class="col-md-4 justify-content-sm-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://source.unsplash.com/120x120/?book" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
+                <partial name="_BookThumbnail" model="defaultBook" />
             </div>
-        </div>
+            <div class="col-md-4 justify-content-sm-center">
+                <partial name="_BookThumbnail" model="defaultBook" />
+            </div>
+        </div>*@
     </div>
 </div>
 

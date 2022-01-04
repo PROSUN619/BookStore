@@ -24,18 +24,7 @@
         @foreach (var book in Model)
         {
             <div class="col-md-4 justify-content-sm-center my-1">
-                <div class="card" style="width: 18rem;">
-                    <img src="@book.CoverImageURL" class="img-thumbnail" alt="..." height="360" width="240">
-                    <div class="card-body">
-                        <h5 class="card-title">@book.Title</h5>
-                        <p class="card-text">@book.Description</p>
-                        <a asp-controller="Book" asp-action="GetBook" asp-route-id="@book.Id"
-                        class="btn btn-primary">View Details</a>
-                        @*<a asp-controller="Book" asp-action="GetBook" asp-all-route-data="@paramDictionary"
-                           class="btn btn-primary">View Details</a>*@
-                        <a class="btn btn-outline-primary" style="float:right">@book.Author</a>
-                    </div>
-                </div>
+                <partial name="_BookThumbnail" model="book"/>                
             </div> 
         }
     </div>

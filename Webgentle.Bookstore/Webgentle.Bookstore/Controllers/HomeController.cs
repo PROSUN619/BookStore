@@ -23,10 +23,11 @@ namespace Webgentle.Bookstore.Controllers
       //ViewBag.Title = "Prasun";
       //ViewBag.Book = new BookModel() {Title = "Sample Book" }; // here we dont need to use ExpandoObject
 
-      ViewData["bookObject"] = new BookModel() {Title = "html",Author="Harry" };
+      //ViewData["bookObject"] = new BookModel() {Title = "html",Author="Harry" };
 
 
       MyProperty = "this is viewdata attribute";
+      //ViewBag.Title = "Displyed from viewBag";
       return View();
     }
 

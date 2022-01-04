@@ -81,6 +81,23 @@ namespace Webgentle.Bookstore.Repository
       //return modelList;
     }
 
+    public async Task<List<BookModel>> GetTopBooksAsync(int count)
+    {
+      return await _context.Books.Select(item => new BookModel()
+      {
+        Id = item.Id,
+        Title = item.Title,
+        Author = item.Author,
+        Category = item.Category,
+        LanguageId = item.LanguageId,
+        Language = item.Language.Name,
+        TotalPages = item.TotalPages,
+        CoverImageURL = item.CoverImageURL,
+        Description = item.Description,
+        BookPdfURL = item.BookPdfURL
+      }).Take(count).ToListAsync();
+    }
+
 
     public async Task<BookModel> GetBook(int id)
     {
