@@ -1,10 +1,12 @@
-﻿<header>
+﻿@inject Webgentle.Bookstore.Repository.IBookRepository _bookRepository
+
+<header>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="/images/bootstrap-logo.svg" alt="" width="30" height="24" asp-append-version="true">
                 @*use asp-append-version to avoid browser cache problem while load from own server*@
-                Book Store
+                @_bookRepository.GetAppName()
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

@@ -8,7 +8,7 @@ using Webgentle.Bookstore.Models;
 
 namespace Webgentle.Bookstore.Repository
 {
-  public class BookRepository
+  public class BookRepository : IBookRepository
   {
     private readonly BookStoreContext _context;
     public BookRepository(BookStoreContext context)
@@ -18,13 +18,14 @@ namespace Webgentle.Bookstore.Repository
 
     public async Task<int> AddNewBooks(BookModel model)
     {
-      var newModel = new Book {
+      var newModel = new Book
+      {
         Author = model.Author,
         CreatedOn = DateTime.Now,
         Description = model.Description,
         LanguageId = model.LanguageId,
         Title = model.Title,
-        TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0 ,
+        TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0,
         ModifiedOn = DateTime.Now,
         CoverImageURL = model.CoverImageURL,
         BookPdfURL = model.BookPdfURL
@@ -34,7 +35,7 @@ namespace Webgentle.Bookstore.Repository
 
       foreach (var item in model.Gallary)
       {
-        newModel.BookGallaries.Add( new BookGallary()
+        newModel.BookGallaries.Add(new BookGallary()
         {
           Name = item.Name,
           URL = item.URL
@@ -42,7 +43,7 @@ namespace Webgentle.Bookstore.Repository
       }
 
       await _context.AddAsync(newModel);
-      await  _context.SaveChangesAsync();
+      await _context.SaveChangesAsync();
       return newModel.Id;
     }
 
@@ -65,8 +66,8 @@ namespace Webgentle.Bookstore.Repository
         Description = item.Description,
         BookPdfURL = item.BookPdfURL
       }).ToListAsync();
-      
-            
+
+
       //if (bookList?.Any() == true){
       //  foreach (var item in bookList)
       //  {
@@ -104,7 +105,7 @@ namespace Webgentle.Bookstore.Repository
       //var book = await _context.Books.FindAsync(id); // this method returnning null ref error when joining with other table
 
       return await _context.Books.Where(x => x.Id == id)
-        .Select(s => new BookModel() 
+        .Select(s => new BookModel()
         {
           Id = s.Id,
           Title = s.Title,
@@ -115,11 +116,11 @@ namespace Webgentle.Bookstore.Repository
           TotalPages = s.TotalPages,
           Description = s.Description,
           CoverImageURL = s.CoverImageURL,
-          Gallary = s.BookGallaries.Select(s1 => new GallaryModel() 
+          Gallary = s.BookGallaries.Select(s1 => new GallaryModel()
           {
-              Id = s1.Id,
-              Name = s1.Name,
-              URL = s1.URL
+            Id = s1.Id,
+            Name = s1.Name,
+            URL = s1.URL
           }).ToList(),
           BookPdfURL = s.BookPdfURL
         }).FirstOrDefaultAsync();
@@ -141,7 +142,7 @@ namespace Webgentle.Bookstore.Repository
       //}
       //else return null;
 
-     // return BookStore().Find(x => x.Id.Equals(id));
+      // return BookStore().Find(x => x.Id.Equals(id));
     }
 
     //public List<BookModel> SearchBook(string title, string author)
@@ -161,5 +162,10 @@ namespace Webgentle.Bookstore.Repository
     //      new BookModel(){Id = 6,Title="vue", Author= "Rita",Category="Programming",Language="English",TotalPages=350, Description="Java is a programming language"},
     //  }; 
     //}
+
+    public string GetAppName()
+    {
+      return "Book Store Application";
+    }
   }
 }

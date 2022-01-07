@@ -1,14 +1,14 @@
 ﻿@model BookModel
 
-<div class="card" style="width: 18rem;">
-    <img src="@Model.CoverImageURL" class="img-thumbnail" alt="..." height="360" width="240">
+<div class="card" style="width: 18rem; height:24rem">    
     <div class="card-body">
+        <img src="@Model.CoverImageURL" class="img-thumbnail" alt="..." height="120" width="120">
         <h5 class="card-title">@Model.Title</h5>
         <p class="card-text">@Model.Description</p>
         <a asp-controller="Book" asp-action="GetBook" asp-route-id="@Model.Id"
            class="btn btn-primary">View Details</a>
         @*<a asp-controller="Book" asp-action="GetBook" asp-all-route-data="@paramDictionary"
-            class="btn btn-primary">View Details</a>*@
+        class="btn btn-primary">View Details</a>*@
         <a class="btn btn-outline-primary" style="float:right">@Model.Author</a>
     </div>
 </div>

@@ -1,4 +1,5 @@
 ﻿@using Webgentle.Bookstore.Enums
+@inject Webgentle.Bookstore.Repository.ILanguageRepository _languageRepository
 
 @{
     ViewData["Title"] = "New Form";
@@ -51,12 +52,13 @@
         </div>
         <div class="form-group">
             <label asp-for="LanguageId"></label>
-            <select asp-for="LanguageId" class="form-select" asp-items="ViewBag.Languages">
+            @*<select asp-for="LanguageId" class="form-select" asp-items="ViewBag.Languages">*@
+            <select asp-for="LanguageId" class="form-select" asp-items="(await _languageRepository.GetLanguages()).Select(s=> new SelectListItem() {Text = s.Name, Value = s.Id.ToString() } )">
                 <option value="">Select</option>
                 <!--<option value="">Select</option>--> @*use value="" for default || required -- use this for html validation*@
                 <!--<option>English</option>
-            <option>Hindi</option>
-            <option>Bengali</option>-->
+                <option>Hindi</option>
+                <option>Bengali</option>-->
             </select>
             <span asp-validation-for="LanguageId" class="text-danger"></span>
         </div>

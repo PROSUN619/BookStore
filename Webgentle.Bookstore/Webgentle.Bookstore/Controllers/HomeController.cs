@@ -30,7 +30,7 @@ namespace Webgentle.Bookstore.Controllers
       //ViewBag.Title = "Displyed from viewBag";
       return View();
     }
-
+    //[Route("about-us/{id}/test/{name}")]
     public ViewResult AboutUs()
     {
       return View();

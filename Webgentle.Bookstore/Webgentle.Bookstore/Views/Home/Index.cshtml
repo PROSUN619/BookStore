@@ -1,4 +1,7 @@
 ﻿@*Coming from layout page will be placed at bottom after layout script tag*@
+@inject Webgentle.Bookstore.Repository.IBookRepository _bookRepository
+@*we are using bookrepository dependancy injection directly from view*@
+
 @section scripts{
     <script>
         $(document).ready(() => {

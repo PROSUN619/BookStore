@@ -39,8 +39,8 @@ namespace Webgentle.Bookstore
 
 #endif
 
-      services.AddScoped<BookRepository, BookRepository>();
-      services.AddScoped<LanguageRepository, LanguageRepository>();
+      services.AddScoped<IBookRepository, BookRepository>();
+      services.AddScoped<ILanguageRepository, LanguageRepository>();
       //add this dependancy injection to create new instance of book repository when controller called
     }
 
@@ -67,7 +67,12 @@ namespace Webgentle.Bookstore
       //this is a end point
       app.UseEndpoints(endpoints =>
       {
-        endpoints.MapDefaultControllerRoute();
+       // endpoints.MapDefaultControllerRoute();
+
+        endpoints.MapControllerRoute(
+           name: "Default",
+           pattern: "{controller=Home}/{action=Index}/{id?}"
+          );
       });
     }
   }
