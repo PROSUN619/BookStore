@@ -66,6 +66,12 @@ namespace Webgentle.Bookstore
       );
       // end configure password strength
 
+      // this code help us to redirect to login page
+      services.ConfigureApplicationCookie(option => {
+        option.LoginPath = _configuration["Application:DefaultURL"];        
+      });
+      // end this code help us to redirect to login page
+
       services.AddScoped<IBookRepository, BookRepository>();
       services.AddScoped<ILanguageRepository, LanguageRepository>();
       services.AddScoped<IAccountRepository, AccountRepository>();
@@ -93,6 +99,7 @@ namespace Webgentle.Bookstore
       app.UseRouting();
 
       app.UseAuthentication(); // add setup with identity core 1
+      app.UseAuthorization(); // then use authorize atrribute on controller/action method
       //this is a end point
       app.UseEndpoints(endpoints =>
       {

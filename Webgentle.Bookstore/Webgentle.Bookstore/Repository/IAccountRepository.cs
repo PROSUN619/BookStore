@@ -7,5 +7,7 @@ namespace Webgentle.Bookstore.Repository
   public interface IAccountRepository
   {
     Task<IdentityResult> CreateUserAync(SignUpUserModel model);
+    Task<SignInResult> PasswordSignInAsync(LoginModel model);
+    Task SignOutAsync();
   }
 }

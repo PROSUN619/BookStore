@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -43,7 +44,8 @@ namespace Webgentle.Bookstore.Controllers
       return View(data);
     }
 
-    public async Task<ViewResult> NewBook(bool isSucess = false, int id = 0)
+    [Authorize] //only login user can visit the page
+    public ViewResult NewBook(bool isSucess = false, int id = 0)
     {
       //var data = new BookModel() { Language = "English" };
       ViewBag.IsSuccess = isSucess;
