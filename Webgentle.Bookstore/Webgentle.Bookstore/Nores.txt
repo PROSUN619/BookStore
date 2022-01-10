@@ -4,3 +4,5 @@ get-help entityframework //view all comand
 Add-Migration init // start migration add classes, init is the name
 update-database
 use novalidate in form tag to prevent html validation
+//for all type seceurity purpose use this package -- feature to add required table into databases
+Microsoft.AspNetCore.Identity.EntityFrameworkCore

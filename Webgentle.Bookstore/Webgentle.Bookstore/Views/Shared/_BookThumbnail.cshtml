@@ -2,7 +2,9 @@
 
 <div class="card" style="width: 18rem; height:24rem">    
     <div class="card-body">
-        <img src="@Model.CoverImageURL" class="img-thumbnail" alt="..." height="120" width="120">
+        <div class="text-center">
+            <img src="@Model.CoverImageURL" class="img-thumbnail rounded" alt="...">
+        </div>        
         <h5 class="card-title">@Model.Title</h5>
         <p class="card-text">@Model.Description</p>
         <a asp-controller="Book" asp-action="GetBook" asp-route-id="@Model.Id"
