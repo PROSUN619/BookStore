@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using System.Dynamic;
 using Webgentle.Bookstore.Models;
 using Microsoft.Extensions.Configuration;
+using Webgentle.Bookstore.Services;
 
 namespace Webgentle.Bookstore.Controllers
 {
   public class HomeController : Controller
   {
     private readonly IConfiguration _configuration;
+    private readonly IUserService _userService;
 
-    public HomeController(IConfiguration configuration)
+    public HomeController(IConfiguration configuration, IUserService userService)
     {
       _configuration = configuration;
+      _userService = userService;
     }
 
     [ViewData]
@@ -23,6 +26,10 @@ namespace Webgentle.Bookstore.Controllers
 
     public ViewResult Index()
     {
+
+      string id = _userService.GetUserId();
+      bool isAuth = _userService.IsUserAuthenticated();
+
       //read connection string from appsettings.json[autoseleted development mode from launchsettings.json]
      
      /*Method 1*/ 

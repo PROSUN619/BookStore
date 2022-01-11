@@ -9,5 +9,6 @@ namespace Webgentle.Bookstore.Repository
     Task<IdentityResult> CreateUserAync(SignUpUserModel model);
     Task<SignInResult> PasswordSignInAsync(LoginModel model);
     Task SignOutAsync();
+    Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
   }
 }

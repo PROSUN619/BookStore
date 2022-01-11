@@ -51,14 +51,18 @@ namespace Webgentle.Bookstore.Controllers
 
     [Route("login")]
     [HttpPost]
-    public async Task<IActionResult> Login(LoginModel model)
+    public async Task<IActionResult> Login(LoginModel model, string returnUrl)
     {
       if (ModelState.IsValid)
       {
         var result = await _accountRepository.PasswordSignInAsync(model);
         if (result.Succeeded)
         {
-          return RedirectToAction("Index", "Home");
+          if (!string.IsNullOrEmpty(returnUrl))
+          {
+            LocalRedirect(returnUrl);
+          }
+          //return RedirectToAction("Index", "Home");
         }
         ModelState.AddModelError("","Invalid Credential");
       }
@@ -72,5 +76,30 @@ namespace Webgentle.Bookstore.Controllers
       return RedirectToAction("Index", "Home");
     }
 
+    [Route("changepassword")]
+    public  IActionResult ChangePassword()
+    {
+      return View();
+    }
+
+    [HttpPost("changepassword")]
+    public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+    {
+      if (ModelState.IsValid)
+      {
+        var result = await _accountRepository.ChangePasswordAsync(model);
+        if (result.Succeeded)
+        {
+          ViewBag.Issuccess = true;
+          ModelState.Clear();
+          return View();
+        }
+        foreach (var error in result.Errors)
+        {
+          ModelState.AddModelError("", error.Description);
+        }
+      }
+      return View();
+    }
   }
 }

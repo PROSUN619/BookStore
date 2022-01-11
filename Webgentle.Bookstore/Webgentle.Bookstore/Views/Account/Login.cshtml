@@ -21,31 +21,32 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <form asp-action="Login">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="EmailId" class="control-label"></label>
-                        <input asp-for="EmailId" class="form-control" />
-                        <span asp-validation-for="EmailId" class="text-danger"></span>
+                @*<form asp-action="Login">*@
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="EmailId" class="control-label"></label>
+                            <input asp-for="EmailId" class="form-control" />
+                            <span asp-validation-for="EmailId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn btn-primary" />
+                        </div>
+                    </form>
+                    <div>
+                        <a asp-controller="Account" asp-action="signup">Dont Have an Account?</a>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Login" class="btn btn-primary" />
-                    </div>
-                </form>
-                <div>
-                    <a asp-controller="Account" asp-action="signup">Dont Have an Account?</a>
-                </div>
-            </div>
+</div>
             <div class="col-md-8">
                 <img src="/images/login.jpg" class="img-fluid" alt="signup">
             </div>

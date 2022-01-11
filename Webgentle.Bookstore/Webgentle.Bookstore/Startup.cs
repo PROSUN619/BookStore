@@ -13,8 +13,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Webgentle.Bookstore.Data;
+using Webgentle.Bookstore.Helper;
 using Webgentle.Bookstore.Models;
 using Webgentle.Bookstore.Repository;
+using Webgentle.Bookstore.Services;
 
 namespace Webgentle.Bookstore
 {
@@ -75,6 +77,8 @@ namespace Webgentle.Bookstore
       services.AddScoped<IBookRepository, BookRepository>();
       services.AddScoped<ILanguageRepository, LanguageRepository>();
       services.AddScoped<IAccountRepository, AccountRepository>();
+      services.AddScoped<IUserService, UserService>();
+      services.AddScoped<IUserClaimsPrincipalFactory<LoginUser>, LoginUserClaimsPrincipalFactory>();
       //add this dependancy injection to create new instance of book repository when controller called
     }
 

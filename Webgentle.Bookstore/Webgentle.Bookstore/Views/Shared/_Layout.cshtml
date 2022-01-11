@@ -16,8 +16,10 @@
 </head>
 <body>
     <partial name="_HeaderPartial" />
-    <main role="main" class="py-5">
-        @RenderBody()
+    <main role="main">
+        <div class="my-5 py-5" >
+            @RenderBody()
+        </div>        
     </main>
     <partial name="_FooterPartial" />
     <script src="~/lib/jquery/jquery.js"></script>
