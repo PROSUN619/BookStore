@@ -39,6 +39,7 @@ namespace Webgentle.Bookstore.Controllers
           return View(model);
         }
         ModelState.Clear();
+        return RedirectToAction("ConfirmEmail", new { email = model.EmailId });
       }
       return View();
     }
@@ -64,6 +65,9 @@ namespace Webgentle.Bookstore.Controllers
           }
           //return RedirectToAction("Index", "Home");
         }
+        if (result.IsNotAllowed)
+          ModelState.AddModelError("", "Please confirm your Email");
+        else
         ModelState.AddModelError("","Invalid Credential");
       }
       return View();
@@ -100,6 +104,49 @@ namespace Webgentle.Bookstore.Controllers
         }
       }
       return View();
+    }
+
+    [HttpGet("email-confirmation")]
+    public async Task<IActionResult> ConfirmEmail(string uid, string token, string email)
+    {
+
+      EmailConfirmModel model = new EmailConfirmModel()
+      {
+        Email = email,
+        IsSent = (email==null) ?false:true
+      };
+            
+      if (!string.IsNullOrEmpty(uid) && !string.IsNullOrEmpty(token))
+      {
+        token = token.Replace(' ', '+');
+        var result = await _accountRepository.ConfirmEmailAsync(uid, token);
+        if (result.Succeeded)
+        {
+          model.IsConfirmed = true;
+        }
+      }
+
+      return View(model);
+    }
+
+    [HttpPost("email-confirmation")]
+    public async Task<IActionResult> ConfirmEmail(EmailConfirmModel model)
+    {
+      var result = await _accountRepository.IsEmailConfirmedAsync(model.Email);
+      if (result)
+      {
+        model.IsConfirmed = result;
+        //return View(model);
+      }
+      else
+      {
+        ModelState.AddModelError("", "Something went wrong!");
+      }
+      return View(model);
+      //else
+      //{
+      //  await _accountRepository.GenerateEmailConfirmationTokenAsync()
+      //}      
     }
   }
 }

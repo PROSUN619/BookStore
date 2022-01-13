@@ -14,11 +14,13 @@ namespace Webgentle.Bookstore.Controllers
   {
     private readonly IConfiguration _configuration;
     private readonly IUserService _userService;
+    private readonly IEmailService _emailService;
 
-    public HomeController(IConfiguration configuration, IUserService userService)
+    public HomeController(IConfiguration configuration, IUserService userService, IEmailService emailService)
     {
       _configuration = configuration;
       _userService = userService;
+      _emailService = emailService;
     }
 
     [ViewData]
@@ -26,6 +28,17 @@ namespace Webgentle.Bookstore.Controllers
 
     public ViewResult Index()
     {
+
+      //UserEmailOptionModel userEmailOptionModel = new UserEmailOptionModel()
+      //{
+      //  ToEmail = new List<string>() { "test@gmil.com" },
+      //  PlaceHolder = new List<KeyValuePair<string, string>>()
+      //  {
+      //    new KeyValuePair<string, string>("{{User}}","Prasun")
+      //  }
+      //};
+
+     // _emailService.SendTestEmail(userEmailOptionModel);
 
       string id = _userService.GetUserId();
       bool isAuth = _userService.IsUserAuthenticated();

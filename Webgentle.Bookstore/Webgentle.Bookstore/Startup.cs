@@ -39,7 +39,7 @@ namespace Webgentle.Bookstore
       //add entity framework service
 
       // add setup with identity core 2 
-      services.AddIdentity<LoginUser, IdentityRole>().AddEntityFrameworkStores<BookStoreContext>();
+      services.AddIdentity<LoginUser, IdentityRole>().AddEntityFrameworkStores<BookStoreContext>().AddDefaultTokenProviders();
       // end add setup with identity core 2 
 
       services.AddControllersWithViews();
@@ -64,6 +64,7 @@ namespace Webgentle.Bookstore
           option.Password.RequireLowercase = false;
           option.Password.RequireNonAlphanumeric = false;
           option.Password.RequireUppercase = false;
+          option.SignIn.RequireConfirmedEmail = true;
         }
       );
       // end configure password strength
@@ -78,8 +79,11 @@ namespace Webgentle.Bookstore
       services.AddScoped<ILanguageRepository, LanguageRepository>();
       services.AddScoped<IAccountRepository, AccountRepository>();
       services.AddScoped<IUserService, UserService>();
+      services.AddScoped<IEmailService, EmailService>();
       services.AddScoped<IUserClaimsPrincipalFactory<LoginUser>, LoginUserClaimsPrincipalFactory>();
       //add this dependancy injection to create new instance of book repository when controller called
+
+      services.Configure<SMTPConfigModel>(_configuration.GetSection("SMTPConfig")); //email config
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

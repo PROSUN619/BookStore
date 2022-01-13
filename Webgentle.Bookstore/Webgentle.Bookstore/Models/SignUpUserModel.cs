@@ -13,7 +13,7 @@ namespace Webgentle.Bookstore.Models
     public string FirstName { get; set; }
 
     [Required(ErrorMessage = "Please Enter Last Name")]
-    [Display(Name = "Enter First Name")]
+    [Display(Name = "Enter Last Name")]
     public string LastName { get; set; }
 
     [Required(ErrorMessage ="Please Enter Email Address")]
