@@ -6,3 +6,4 @@ update-database
 use novalidate in form tag to prevent html validation
 //for all type seceurity purpose use this package -- feature to add required table into databases
 Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@if (Model?.EmailSent == true) // here ? used for to handle null reference error

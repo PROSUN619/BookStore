@@ -35,6 +35,13 @@ namespace Webgentle.Bookstore.Services
       await SendEmail(emailOptionmodel);
     }
 
+    public async Task SendEmailForgotPassword(UserEmailOptionModel emailOptionmodel)
+    {
+      emailOptionmodel.Subject = "PLease restore your email";
+      emailOptionmodel.Body = UpdatePLaceHolder(GetEmailBody("ForgotPassword"), emailOptionmodel.PlaceHolder);
+      await SendEmail(emailOptionmodel);
+    }
+
     private async Task SendEmail(UserEmailOptionModel emailOptionmodel)
     {
       MailMessage mail = new MailMessage()

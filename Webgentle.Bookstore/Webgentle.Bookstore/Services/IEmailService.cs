@@ -8,5 +8,6 @@ namespace Webgentle.Bookstore.Services
     Task SendTestEmail(UserEmailOptionModel emailOptionmodel);
 
     Task SendEmailConfirmation(UserEmailOptionModel emailOptionmodel);
+    Task SendEmailForgotPassword(UserEmailOptionModel emailOptionmodel);
   }
 }
