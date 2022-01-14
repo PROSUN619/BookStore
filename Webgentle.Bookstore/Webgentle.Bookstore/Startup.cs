@@ -117,6 +117,11 @@ namespace Webgentle.Bookstore
            name: "Default",
            pattern: "{controller=Home}/{action=Index}/{id?}"
           );
+
+        endpoints.MapControllerRoute(
+           name: "Area",
+           pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+          );
       });
     }
   }

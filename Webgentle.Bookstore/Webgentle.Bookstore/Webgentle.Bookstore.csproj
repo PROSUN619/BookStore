@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Finance\Data\" />
+    <Folder Include="Areas\Finance\Models\" />
     <Folder Include="wwwroot\books\gallary\" />
     <Folder Include="wwwroot\books\pdf\" />
     <Folder Include="wwwroot\js\" />

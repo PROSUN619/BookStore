@@ -7,6 +7,7 @@ using System.Dynamic;
 using Webgentle.Bookstore.Models;
 using Microsoft.Extensions.Configuration;
 using Webgentle.Bookstore.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Webgentle.Bookstore.Controllers
 {
@@ -72,7 +73,8 @@ namespace Webgentle.Bookstore.Controllers
     {
       return View();
     }
-
+    
+    [Authorize(Roles ="Admin")]
     public ViewResult ContactUs()
     {
       return View();
