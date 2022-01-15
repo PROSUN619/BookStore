@@ -65,10 +65,19 @@ namespace Webgentle.Bookstore
           option.Password.RequireNonAlphanumeric = false;
           option.Password.RequireUppercase = false;
           option.SignIn.RequireConfirmedEmail = true;
+          option.Lockout.MaxFailedAccessAttempts = 3;
+          option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
         }
       );
       // end configure password strength
 
+      // start token life span
+
+      // end token life span
+      services.Configure<DataProtectionTokenProviderOptions>(option => 
+      {
+        option.TokenLifespan = TimeSpan.FromMinutes(10);
+      });
       // this code help us to redirect to login page
       services.ConfigureApplicationCookie(option => {
         option.LoginPath = _configuration["Application:DefaultURL"];        

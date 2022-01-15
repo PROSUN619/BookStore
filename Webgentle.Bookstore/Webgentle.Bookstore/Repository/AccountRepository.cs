@@ -79,7 +79,7 @@ namespace Webgentle.Bookstore.Repository
 
     public async Task<SignInResult> PasswordSignInAsync(LoginModel model)
     {
-     var result = await _signInManager.PasswordSignInAsync(model.EmailId, model.Password, model.RememberMe, false);
+     var result = await _signInManager.PasswordSignInAsync(model.EmailId, model.Password, model.RememberMe, true);
       return result;
     }
 

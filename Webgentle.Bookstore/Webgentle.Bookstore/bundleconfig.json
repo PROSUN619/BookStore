@@ -1,0 +1,23 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css",
+      "wwwroot/css/site1.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/javascript1.min.js",
+    "inputFiles": [
+      "wwwroot/js/javascript1.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]

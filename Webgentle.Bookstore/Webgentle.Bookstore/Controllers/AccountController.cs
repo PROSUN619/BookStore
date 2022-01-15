@@ -66,7 +66,9 @@ namespace Webgentle.Bookstore.Controllers
           }
           //return RedirectToAction("Index", "Home");
         }
-        if (result.IsNotAllowed)
+        else if (result.IsLockedOut)
+          ModelState.AddModelError("", "Your account has been locked for 1 minute");
+        else if (result.IsNotAllowed)
           ModelState.AddModelError("", "Please confirm your Email");
         else
         ModelState.AddModelError("","Invalid Credential");

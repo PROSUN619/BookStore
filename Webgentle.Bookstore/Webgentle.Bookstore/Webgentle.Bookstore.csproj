@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
@@ -22,7 +23,6 @@
     <Folder Include="Areas\Finance\Models\" />
     <Folder Include="wwwroot\books\gallary\" />
     <Folder Include="wwwroot\books\pdf\" />
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
   <ItemGroup>
