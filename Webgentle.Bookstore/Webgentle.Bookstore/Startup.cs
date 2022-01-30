@@ -91,17 +91,27 @@ namespace Webgentle.Bookstore
       services.AddScoped<IEmailService, EmailService>();
       services.AddScoped<IUserClaimsPrincipalFactory<LoginUser>, LoginUserClaimsPrincipalFactory>();
       //add this dependancy injection to create new instance of book repository when controller called
-
       services.Configure<SMTPConfigModel>(_configuration.GetSection("SMTPConfig")); //email config
+                        
+      // here Iopntion will work but no refreshed and Ioptionsnapshot will throw an error, hence use IoptionMonitor
+      services.AddSingleton<IMessageRepository, MessageRepository>();
+
+      
+
+      //named option
+      //services.Configure<NewBookAlertConfig>(_configuration.GetSection("NewBookAlert"));
+      services.Configure<NewBookAlertConfig>("NewBook", _configuration.GetSection("NewBookAlert"));
+      services.Configure<NewBookAlertConfig>("ThirdParty", _configuration.GetSection("ThirdPartyBookAlert"));
+      //end named option
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-      if (env.IsDevelopment())
-      {
+      //if (env.IsDevelopment())
+      //{
         app.UseDeveloperExceptionPage();
-      }
+     // }
 
       app.UseStaticFiles();
 

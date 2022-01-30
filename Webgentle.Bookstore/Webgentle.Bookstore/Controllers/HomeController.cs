@@ -8,6 +8,8 @@ using Webgentle.Bookstore.Models;
 using Microsoft.Extensions.Configuration;
 using Webgentle.Bookstore.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
+using Webgentle.Bookstore.Repository;
 
 namespace Webgentle.Bookstore.Controllers
 {
@@ -16,12 +18,22 @@ namespace Webgentle.Bookstore.Controllers
     private readonly IConfiguration _configuration;
     private readonly IUserService _userService;
     private readonly IEmailService _emailService;
+    //using named option in controller
+    //private readonly IOptions<NewBookAlertConfig> _option;
+    private readonly IOptionsSnapshot<NewBookAlertConfig> _option;
+    private readonly IMessageRepository _messageRepository;
 
-    public HomeController(IConfiguration configuration, IUserService userService, IEmailService emailService)
+    //end using named option in controller
+    public HomeController(IConfiguration configuration, IUserService userService, IEmailService emailService,
+      //IOptions<NewBookAlertConfig> option )
+      IOptionsSnapshot<NewBookAlertConfig> option, IMessageRepository messageRepository)
+    //since IOptions works with singleton pattern we have to use Ioptionsnapshot to reload the changes in app.config
     {
       _configuration = configuration;
       _userService = userService;
       _emailService = emailService;
+      _option = option;
+      _messageRepository = messageRepository;
     }
 
     [ViewData]
@@ -30,6 +42,13 @@ namespace Webgentle.Bookstore.Controllers
     public ViewResult Index()
     {
 
+      //var result = _option.Value.BookName;
+      //var result = _messageRepository.GetName();
+      //using named option
+      var newbook = _option.Get("NewBook").BookName;
+      var thirdBook = _option.Get("ThirdParty").BookName;
+      //end using named option
+      Console.WriteLine("stop here");
       //UserEmailOptionModel userEmailOptionModel = new UserEmailOptionModel()
       //{
       //  ToEmail = new List<string>() { "test@gmil.com" },
